@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Политика конфиденциальности — Fish Navigator</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0A1520;
+            --surface: #132233;
+            --primary: #F4A527;
+            --water: #1B6CA8;
+            --text: #FFFFFF;
+            --text-secondary: #8899AA;
+            --text-muted: #5a6a7a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a { color: var(--primary); text-decoration: none; }
+        a:hover { color: #ffc04d; }
+
+        header {
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 18px 24px;
+        }
+
+        header a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        header img {
+            width: 32px;
+            height: 32px;
+            border-radius: 7px;
+        }
+
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .updated {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        p { margin-bottom: 16px; color: var(--text-secondary); }
+        p strong { color: var(--text); }
+
+        ul {
+            margin: 0 0 16px 24px;
+            color: var(--text-secondary);
+        }
+
+        li { margin-bottom: 8px; }
+
+        .contact-box {
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+
+        .contact-box p { color: var(--text-secondary); }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer a:hover { color: var(--text); }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html"><img src="logo.png" alt="Fish Navigator"> Fish Navigator</a>
+</header>
+
+<main>
+    <h1>Политика конфиденциальности</h1>
+    <p class="updated" style="color: var(--text-muted);">Последнее обновление: 10 августа 2026 г.</p>
+
+    <p>Настоящая Политика конфиденциальности описывает, как мобильное приложение <strong>Fish Navigator</strong> (далее — «Приложение») обрабатывает информацию пользователей. Приложение разработано Василием Беляевым (далее — «Разработчик»), Республика Казахстан.</p>
+
+    <h2>1. Какие данные собирает приложение</h2>
+    <p><strong>Приложение не собирает, не передаёт и не хранит на сервере никаких персональных данных.</strong></p>
+    <p>Fish Navigator работает полностью офлайн. Все данные (база водоёмов, пользовательsKo записи, настройки) хранятся исключительно на устройстве пользователя.</p>
+
+    <h2>2. Геолокация</h2>
+    <p>Приложение может запросить доступ к геолокации устройства для следующих целей:</p>
+    <ul>
+        <li>Отображение вашей позиции на карте водоёмов</ni>
+        <li>Расчёт расстояния и маршрута до выбранного водоёма</li>
+    </ul>
+    <p>Данные геолокации обрабатываются только на устройстве. Они <strong>не передаются</strong> на внешние серверы, не сохраняются в облаке и не доступны Разработчику или третьим лицам. Вы можете отключить доступ к геолокации в настройках вашего устройства.</p>
+
+    <h2>3. Камера и фотографии</h2>
+    <p>Приложение может запросить доступ к камере и галерее для функции ЫДневник уловов» — чтобы прикреплять фотографии к записям. Фотографии хранятся только на вашем устройстве и не передаются никуда.</p>
+
+    <h2>4. Аналитика и реклама</h2>
+    <p>Приложение <strong>не содержит</strong>:</p>
+    <ul>
+        <li>Систем аналитики (Google Analytics, Firebase Analytics и т.п.)</li>
+        <li>Рекламных SDK</li>
+        <li>Трекеров и счётчиков</ni>
+        <li>Интеграций с социальными сетями</li>
+    </ul>
+
+    <h2>5. Сетевые запросы</h2>
+    <p>Приложение не выполняет сетевых запросов. Для работы не требуется подключение к интернету. Исключение — загрузка тайлов карт (OpenStreetMap), если пользователь просматривает карту при наличии интернета. В этом случае применяется <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank">политика конфиденциальности OpenStreetMap</a>.</p>
+
+    <h2>6. Хранение данных</h2>
+    <p>Все пользовательsKo данные (записи дневника, избранные водоёмы, настройки) хранятся в локальном хранилище на устройстве пользователя. При удалении приложения эти данные удаляются вместе с ним.По удалении приложения эти данные удаляются вместе с ним.Пто удалении </p>
+
+    <h2>7. Данные детей</h2>
+    <p>Приложение не предназначено для детей младше 13 лет и не собирает намеренно информацию от детей.é Поскольку приложение вообще не собирает персональных данных, этот пункт носит формальный характер.</p>
+
+    <h2>8. Изменения политики</h2>
+    <p>Разработчик оставляет за собой право обновлять данную Политику. Актуальная версия доступна по адресу <strong>fishnavigator.kz/privacy.html</strong>. При существенных изменениях уведомление будет размещено на главной странице сайта.</p>
+
+    <h2>9. Права пользователей</h2>
+    <p>Поскольку приложение не собирает персональных данных, запросы на доступ, исправление или удаление данных неприменимы. Если у вас есть вопросы — свяжитесь с Разработчиком.</p>
+
+    <div class="contact-box">
+        <h2 style="margin-top: 0;">10. Контакты</h2>
+        <p>По вопросам конфиденциальности и работы приложения:</p>
+        <p><strong>Разработчик:</strong> Василий Беляев<br>
+        <strong>Email:</strong> <a href="mailto:vassiliy.belyayev@gmail.com">vassiliy.belyayev@gmail.com</a><br>
+        <strong>Страна:</strong> Республика Казахстан</p>
+    </div>
+</main>
+
+<footer>
+    <a href="index.html">← Вернуться на главную</a>
+    <p>&copy; 2026 Fish Navigator</p>
+</footer>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Политика конфиденциальности — Fish Navigator</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0A1520;
+            --surface: #132233;
+            --primary: #F4A527;
+            --water: #1B6CA8;
+            --text: #FFFFFF;
+            --text-secondary: #8899AA;
+            --text-muted: #5a6a7a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a { color: var(--primary); text-decoration: none; }
+        a:hover { color: #ffc04d; }
+
+        header {
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 18px 24px;
+        }
+
+        header a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        header img {
+            width: 32px;
+            height: 32px;
+            border-radius: 7px;
+        }
+
+        main {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .updated {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        p { margin-bottom: 16px; color: var(--text-secondary); }
+        p strong { color: var(--text); }
+
+        ul {
+            margin: 0 0 16px 24px;
+            color: var(--text-secondary);
+        }
+
+        li { margin-bottom: 8px; }
+
+        .contact-box {
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+
+        .contact-box p { color: var(--text-secondary); }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer a:hover { color: var(--text); }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html"><img src="logo.png" alt="Fish Navigator"> Fish Navigator</a>
+</header>
+
+<main>
+    <h1>Политика конфиденциальности</h1>
+    <p class="updated" style="color: var(--text-muted);">Последнее обновление: 10 августа 2026 г.</p>
+
+    <p>Настоящая Политика конфиденциальности описывает, как мобильное приложение <strong>Fish Navigator</strong> (далее — «Приложение») обрабатывает информацию пользователей. Приложение разработано Василием Беляевым (далее — «Разработчик»), Республика Казахстан.</p>
+
+    <h2>1. Какие данные собирает приложение</h2>
+    <p><strong>Приложение не собирает, не передаёт и не хранит на сервере никаких персональных данных.</strong></p>
+    <p>Fish Navigator работает полностью офлайн. Все данные (база водоёмов, пользовательские записи, настройки) хранятся исключительно на устройстве пользователя.</p>
+
+    <h2>2. Геолокация</h2>
+    <p>Приложение может запросить доступ к геолокации устройства для следующих целей:</p>
+    <ul>
+        <li>Отображение вашей позиции на карте водоёмов</li>
+        <li>Расчёт расстояния и маршрута до выбранного водоёма</li>
+    </ul>
+    <p>Данные геолокации обрабатываются только на устройстве. Они <strong>не передаются</strong> на внешние серверы, не сохраняются в облаке и не доступны Разработчику или третьим лицам. Вы можете отключить доступ к геолокации в настройках вашего устройства.</p>
+
+    <h2>3. Камера и фотографии</h2>
+    <p>Приложение может запросить доступ к камере и галерее для функции «Дневник уловов» — чтобы прикреплять фотографии к записям. Фотографии хранятся только на вашем устройстве и не передаются никуда.</p>
+
+    <h2>4. Аналитика и реклама</h2>
+    <p>Приложение <strong>не содержит</strong>:</p>
+    <ul>
+        <li>Систем аналитики (Google Analytics, Firebase Analytics и т.п.)</li>
+        <li>Рекламных SDK</li>
+        <li>Трекеров и счётчиков</li>
+        <li>Интеграций с социальными сетями</li>
+    </ul>
+
+    <h2>5. Сетевые запросы</h2>
+    <p>Приложение не выполняет сетевых запросов. Для работы не требуется подключение к интернету. Исключение — загрузка тайлов карт (OpenStreetMap), если пользователь просматривает карту при наличии интернета. В этом случае применяется <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank">политика конфиденциальности OpenStreetMap</a>.</p>
+
+    <h2>6. Хранение данных</h2>
+    <p>Все пользовательские данные (записи дневника, избранные водоёмы, настройки) хранятся в локальном хранилище на устройстве пользователя. При удалении приложения эти данные удаляются вместе с ним.</p>
+
+    <h2>7. Данные детей</h2>
+    <p>Приложение не предназначено для детей младше 13 лет и не собирает намеренно информацию от детей. Поскольку приложение вообще не собирает персональных данных, этот пункт носит формальный характер.</p>
+
+    <h2>8. Изменения политики</h2>
+    <p>Разработчик оставляет за собой право обновлять данную Политику. Актуальная версия всегда доступна по адресу <strong>fishnavigator.kz/privacy.html</strong>. При существенных изменениях уведомление будет размещено на главной странице сайта.</p>
+
+    <h2>9. Права пользователей</h2>
+    <p>Поскольку приложение не собирает персональных данных, запросы на доступ, исправление или удаление данных неприменимы. Если у вас есть вопросы — свяжитесь с Разработчиком.</p>
+
+    <div class="contact-box">
+        <h2 style="margin-top: 0;">10. Контакты</h2>
+        <p>По вопросам конфиденциальности и работы приложения:</p>
+        <p><strong>Разработчик:</strong> Василий Беляев<br>
+        <strong>Email:</strong> <a href="mailto:vassiliy.belyayev@gmail.com">vassiliy.belyayev@gmail.com</a><br>
+        <strong>Страна:</strong> Республика Казахстан</p>
+    </div>
+</main>
+
+<footer>
+    <a href="index.html">← Вернуться на главную</a>
+    <p>&copy; 2026 Fish Navigator</p>
+</footer>
+
+</body>
+</html>
