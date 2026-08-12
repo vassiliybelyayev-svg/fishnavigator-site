@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Navigator — Рыболовный гид по Казахстану</title>
+    <meta name="description" content="939 водоёмов Казахстана в одном приложении. Озёра, реки, базы отдыха — офлайн-карты, GPS-трекер, дневник уловов.">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0A1520;
+            --surface: #132233;
+            --surface-hover: #1a2d42;
+            --primary: #F4A527;
+            --primary-dim: rgba(244, 165, 39, 0.15);
+            --water: #1B6CA8;
+            --water-dim: rgba(27, 108, 168, 0.2);
+            --success: #27AE60;
+            --danger: #E74C3C;
+            --text: #FFFFFF;
+            --text-secondary: #8899AA;
+            --text-muted: #5a6a7a;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a { color: var(--primary); text-decoration: none; }
+        a:hover { color: #ffc04d; }
+
+        /* === NAV === */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(10, 21, 32, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            margin-left: 28px;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        /* === HERO === */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(27, 108, 168, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-text { flex: 1; }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-dim);
+            color: var(--primary);
+            border: 1px solid rgba(244, 165, 39, 0.3);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero-text h1 .accent { color: var(--primary); }
+
+        .hero-text p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 480px;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .badge .b-icon { font-size: 1.1rem; }
+
+        .hero-visual {
+            flex: 0 0 300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo-hero {
+            width: 260px;
+            height: 260px;
+            border-radius: 48px;
+            box-shadow: 0 24px 80px rgba(244, 165, 39, 0.15), 0 0 0 1px rgba(255,255,255,0.06);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* === STATS === */
+        .stats {
+            padding: 60px 24px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .stats-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 24px 16px;
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* === FEATURES === */
+        .features {
+            padding: 100px 24px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 32px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(244, 165, 39, 0.2);
+        }
+
+        .feature-icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .fi-map { background: var(--water-dim); }
+        .fi-gps { background: var(--primary-dim); }
+        .fi-log { background: rgba(39, 174, 96, 0.15); }
+        .fi-ban { background: rgba(231, 76, 60, 0.15); }
+        .fi-fish { background: var(--water-dim); }
+        .fi-base { background: rgba(39, 174, 96, 0.15); }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        /* === OFFLINE === */
+        .offline {
+            padding: 64px 24px;
+            text-align: center;
+            background: linear-gradient(180deg, transparent, rgba(27, 108, 168, 0.08), transparent);
+        }
+
+        .offline-inner {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid rgba(27, 108, 168, 0.25);
+            border-radius: 20px;
+            padding: 48px 40px;
+        }
+
+        .offline-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .offline h2 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .offline p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* === CTA === */
+        .cta {
+            padding: 80px 24px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .cta > p {
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 12px;
+            max-width: 460px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .email-form input {
+            flex: 1;
+            min-width: 220px;
+            padding: 14px 20px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: var(--surface);
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .email-form input::placeholder { color: var(--text-muted); }
+        .email-form input:focus { border-color: var(--primary); }
+
+        .email-form button {
+            padding: 14px 28px;
+            background: var(--primary);
+            color: var(--bg);
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .email-form button:hover { background: #ffc04d; }
+
+        .form-note {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 12px;
+        }
+
+        .form-success {
+            display: none;
+            color: var(--success);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 16px;
+        }
+
+        /* === FOR BASES === */
+        .for-bases {
+            padding: 64px 24px;
+            text-align: center;
+        }
+
+        .bases-inner {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--surface);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 48px 40px;
+        }
+
+        .bases-inner h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        .bases-inner p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 12px 28px;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--bg);
+        }
+
+        /* === FOOTER === */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 40px 24px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            margin: 0 16px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover { color: var(--text); }
+
+        .footer-copy {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                padding: 100px 24px 60px;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+            }
+
+            .hero-text h1 { font-size: 2rem; }
+            .hero-text p { margin: 0 auto 24px; }
+            .hero-badges { justify-content: center; }
+
+            .hero-visual { flex: none; }
+
+            .logo-hero {
+                width: 180px;
+                height: 180px;
+                border-radius: 36px;
+            }
+
+            .stats-inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links { display: none; }
+
+            .offline-inner,
+            .bases-inner {
+                padding: 32px 24px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <div class="logo">
+            <img src="logo.png" alt="Fish Navigator">
+            Fish Navigator
+        </div>
+        <div class="nav-links">
+            <a href="#features">Возможности</a>
+            <a href="#download">Скачать</a>
+            <a href="privacy.html">Конфиденциальность</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <div class="hero-tag">🇰🇿 Сделано в Казахстане</div>
+            <h1>Все водоёмы Казахстана <span class="accent">в кармане</span></h1>
+            <p>939 озёр, рек и баз отдыха с координатами, описаниями и правилами рыбалки. Работает полностью без интернета.</p>
+            <div class="hero-badges">
+                <span class="badge"><span class="b-icon">📍</span> 939 водоёмов</span>
+                <span class="badge"><span class="b-icon">📶</span> Офлайн</span>
+                <span class="badge"><span class="b-icon">🗺️</span> Карта</span>
+                <span class="badge"><span class="b-icon">🆓</span> Бесплатно</span>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="logo.png" alt="Fish Navigator" class="logo-hero">
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+    <div class="stats-inner">
+        <div class="stat">
+            <div class="stat-number">877</div>
+            <div class="stat-label">озёр</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">29</div>
+            <div class="stat-label">рек</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">33</div>
+            <div class="stat-label">базы отдыха</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">0 ₸</div>
+            <div class="stat-label">бесплатно</div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+    <div class="section-header">
+        <h2>Что умеет Fish Navigator</h2>
+        <p>Всё для рыбалки в одном приложении</p>
+    </div>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon-wrap fi-map">🗺️</div>
+            <h3>Офлайн-карта</h3>
+            <p>Все водоёмы на карте с координатами. Работает без интернета — бери телефон и езжай.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrap fi-gps">📍</div>
+            <h3>GPS-навигация</h3>
+            <p>Проложи маршрут до водоёма и поделись им с другом — на бездорожье, где дороги расходятся веером, это спасает от плутания.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrap fi-log">📓</div>
+            <h3>Дневник уловов</h3>
+            <p>Записывай свои уловы: вид рыбы, вес, фото, место. Вся история под рукой.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrap fi-ban">🚫</div>
+            <h3>Календарь запретов</h3>
+            <p>Актуальные сроки нерестового запрета по регионам. Не попадай на штраф.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrap fi-fish">🐠</div>
+            <h3>Виды рыб</h3>
+            <p>Какая рыба водится в каждом водоёме. Описания, ареал, особенности.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrap fi-base">🏕️</div>
+            <h3>Базы отдыха</h3>
+            <p>33 базы отдыха Бухтармы и ВКО с описаниями, координатами и контактами.</p>
+        </div>
+    </div>
+</section>
+
+<!-- OFFLINE -->
+<section class="offline">
+    <div class="offline-inner">
+        <div class="offline-icon">📶</div>
+        <h2>Работает без интернета</h2>
+        <p>Вся база данных хранится на телефоне. Никакого сервера, никакой рекламы, никакого сбора данных. Просто открой и пользуйся.</p>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="download">
+    <h2>Скоро в Google Play и App Store</h2>
+    <p>Оставь email — напишем, когда приложение появится в магазинах</p>
+    <form class="email-form" id="emailForm">
+        <input type="email" placeholder="Твой email" required id="emailInput">
+        <button type="submit">Сообщить мне</button>
+    </form>
+    <p class="form-note">Только уведомление о запуске. Без спама.</p>
+    <p class="form-success" id="formSuccess">Готово! Мы напишем тебе при запуске 🎣</p>
+</section>
+
+<!-- FOR BASES -->
+<section class="for-bases">
+    <div class="bases-inner">
+        <h2>🏕️ Вы — владелец базы отдыха?</h2>
+        <p>Размещайте свою базу в приложение Fish Navigator. Тысячи рыболовов Казахстана увидят ваше предложение.</p>
+        <a href="mailto:vassiliy.belyayev@gmail.com?subject=Fish Navigator — размещение базы отдыха" class="btn-outline">Связаться с нами</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-links">
+        <a href="privacy.html">Политика конфиденциальности</a>
+        <a href="mailto:vassiliy.belyayev@gmail.com">Связаться</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Fish Navigator. Все водоёмы Казахстана в одном приложении.</p>
+</footer>
+
+<script>
+    document.getElementById('emailForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('emailInput').value;
+        console.log('Email submitted:', email);
+        this.style.display = 'none';
+        document.querySelector('.form-note').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+    });
+</script>
+
+</body>
+</html>
