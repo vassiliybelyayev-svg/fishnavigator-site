@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fish Navigator — Рыболовный гид по Казахстану</title>
-    <meta name="description" content="939 водоёмов Казахстана в одном приложении. Озёра, реки, базы отдыха — офлайн-карты, GPS-трекер, дневник уловов.">
+    <meta name="description" content="Более 1000 водоёмов Казахстана в одном приложении: озёра, реки, рыболовные базы, запреты на лов, прогноз клёва, дневник уловов и GPS-трекер.">
     <link rel="icon" href="favicon.png" type="image/png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -378,6 +378,19 @@
 
         .email-form button:hover { background: #ffc04d; }
 
+        .cta-btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background: var(--primary);
+            color: var(--bg);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: background 0.2s;
+        }
+
+        .cta-btn:hover { background: #ffc04d; color: var(--bg); }
+
         .form-note {
             font-size: 0.82rem;
             color: var(--text-muted);
@@ -587,10 +600,10 @@
         <div class="hero-text">
             <div class="hero-tag">🇰🇿 Сделано в Казахстане</div>
             <h1>Все водоёмы Казахстана <span class="accent">в кармане</span></h1>
-            <p>939 озёр, рек и баз отдыха с координатами, описаниями и правилами рыбалки. Работает полностью без интернета.</p>
+            <p>Более 1000 озёр, рек и рыболовных баз во всех 16 областях — с координатами, видами рыбы и запретами на лов. База водоёмов работает без интернета.</p>
             <div class="hero-badges">
-                <span class="badge"><span class="b-icon">📍</span> 939 водоёмов</span>
-                <span class="badge"><span class="b-icon">📶</span> Офлайн</span>
+                <span class="badge"><span class="b-icon">📍</span> 1000+ водоёмов</span>
+                <span class="badge"><span class="b-icon">🎣</span> Прогноз клёва</span>
                 <span class="badge"><span class="b-icon">🗺️</span> Карта</span>
                 <span class="badge"><span class="b-icon">🆓</span> Бесплатно</span>
             </div>
@@ -605,16 +618,16 @@
 <section class="stats">
     <div class="stats-inner">
         <div class="stat">
-            <div class="stat-number">877</div>
+            <div class="stat-number">897</div>
             <div class="stat-label">озёр</div>
         </div>
         <div class="stat">
-            <div class="stat-number">29</div>
-            <div class="stat-label">рек</div>
+            <div class="stat-number">36</div>
+            <div class="stat-label">участков рек</div>
         </div>
         <div class="stat">
-            <div class="stat-number">33</div>
-            <div class="stat-label">базы отдыха</div>
+            <div class="stat-number">75</div>
+            <div class="stat-label">рыболовных баз</div>
         </div>
         <div class="stat">
             <div class="stat-number">0 ₸</div>
@@ -632,33 +645,33 @@
     <div class="features-grid">
         <div class="feature-card">
             <div class="feature-icon-wrap fi-map">🗺️</div>
-            <h3>Офлайн-карта</h3>
-            <p>Все водоёмы на карте с координатами. Работает без интернета — бери телефон и езжай.</p>
+            <h3>Карта водоёмов</h3>
+            <p>Все водоёмы на карте с координатами и видами рыбы. Поиск по названию, рыбе или региону. Список и карточки водоёмов открываются и без интернета.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon-wrap fi-gps">📍</div>
-            <h3>GPS-навигация</h3>
-            <p>Проложи маршрут до водоёма и поделись им с другом — на бездорожье, где дороги расходятся веером, это спасает от плутания.</p>
+            <div class="feature-icon-wrap fi-ban">🚫</div>
+            <h3>Запреты на лов</h3>
+            <p>Нерестовые запреты и ограничения по 8 рыбохозяйственным бассейнам Казахстана — по действующим Правилам рыболовства. Не попадай на штраф.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon-wrap fi-fish">🎣</div>
+            <h3>Прогноз клёва</h3>
+            <p>Активность рыбы по дням на основе погоды, атмосферного давления и фазы луны. Выбери водоём и лучший день для выезда.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon-wrap fi-log">📓</div>
             <h3>Дневник уловов</h3>
-            <p>Записывай свои уловы: вид рыбы, вес, фото, место. Вся история под рукой.</p>
+            <p>Записывай уловы: вид рыбы, вес, снасть, фото, место. Статистика и личные рекорды считаются сами.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon-wrap fi-ban">🚫</div>
-            <h3>Календарь запретов</h3>
-            <p>Актуальные сроки нерестового запрета по регионам. Не попадай на штраф.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon-wrap fi-fish">🐠</div>
-            <h3>Виды рыб</h3>
-            <p>Какая рыба водится в каждом водоёме. Описания, ареал, особенности.</p>
+            <div class="feature-icon-wrap fi-gps">📍</div>
+            <h3>Навигация и трекер</h3>
+            <p>Открой водоём в Google Картах, Яндекс Картах или 2ГИС одним нажатием. GPS-трекер запишет путь, время и дистанцию рыбалки.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon-wrap fi-base">🏕️</div>
-            <h3>Базы отдыха</h3>
-            <p>33 базы отдыха Бухтармы и ВКО с описаниями, координатами и контактами.</p>
+            <h3>Базы и платные пруды</h3>
+            <p>Рыболовные базы, форелевые хозяйства и усадьбы с рыбалкой — с координатами и контактами.</p>
         </div>
     </div>
 </section>
@@ -667,28 +680,24 @@
 <section class="offline">
     <div class="offline-inner">
         <div class="offline-icon">📶</div>
-        <h2>Работает без интернета</h2>
-        <p>Вся база данных хранится на телефоне. Никакого сервера, никакой рекламы, никакого сбора данных. Просто открой и пользуйся.</p>
+        <h2>База всегда с собой</h2>
+        <p>Вся база водоёмов хранится на телефоне и открывается без сети — там, где нет связи. Интернет нужен только для карты и прогноза погоды. Без регистрации и без рекламы, а уловы и заметки остаются только на твоём телефоне. <a href="privacy.html">Подробнее о данных</a></p>
     </div>
 </section>
 
 <!-- CTA -->
 <section class="cta" id="download">
     <h2>Скоро в Google Play и App Store</h2>
-    <p>Оставь email — напишем, когда приложение появится в магазинах</p>
-    <form class="email-form" id="emailForm">
-        <input type="email" placeholder="Твой email" required id="emailInput">
-        <button type="submit">Сообщить мне</button>
-    </form>
-    <p class="form-note">Только уведомление о запуске. Без спама.</p>
-    <p class="form-success" id="formSuccess">Готово! Мы напишем тебе при запуске 🎣</p>
+    <p>Хочешь узнать о запуске первым? Отправь нам письмо — ответим, как только приложение появится в Google Play.</p>
+    <a class="cta-btn" href="mailto:fishnavigator.kz@gmail.com?subject=Сообщите о запуске Fish Navigator&body=Хочу узнать, когда Fish Navigator появится в Google Play.">Сообщить мне о запуске</a>
+    <p class="form-note">Откроется письмо в твоей почте — просто отправь его. Только уведомление о запуске, без спама.</p>
 </section>
 
 <!-- FOR BASES -->
 <section class="for-bases">
     <div class="bases-inner">
         <h2>🏕️ Вы — владелец базы отдыха?</h2>
-        <p>Размещайте свою базу в приложении Fish Navigator. Тысячи рыболовов Казахстана увидят ваше предложение.</p>
+        <p>Размещайте свою базу в приложении Fish Navigator — рыболовы увидят её на карте и в поиске вместе с контактами.</p>
         <a href="mailto:fishnavigator.kz@gmail.com?subject=Fish Navigator — размещение базы отдыха" class="btn-outline">Связаться с нами</a>
     </div>
 </section>
@@ -720,15 +729,6 @@
 </footer>
 
 <script>
-    document.getElementById('emailForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('emailInput').value;
-        console.log('Email submitted:', email);
-        this.style.display = 'none';
-        document.querySelector('.form-note').style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
-    });
-
     document.getElementById('licenseForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const name = document.getElementById('licenseName').value.trim();
