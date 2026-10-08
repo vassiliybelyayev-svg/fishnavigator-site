@@ -510,6 +510,32 @@
 
         .license-form button:hover { background: #ffc04d; }
 
+        /* === INSTAGRAM === */
+        .ig-icon {
+            display: inline-block;
+            width: 20px; height: 20px;
+            background-color: currentColor;
+            -webkit-mask: url('https://cdn.jsdelivr.net/npm/simple-icons@13.0.0/icons/instagram.svg') center / contain no-repeat;
+            mask: url('https://cdn.jsdelivr.net/npm/simple-icons@13.0.0/icons/instagram.svg') center / contain no-repeat;
+            vertical-align: middle;
+        }
+        .nav-ig {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px; height: 38px;
+            margin-left: 18px;
+            border-radius: 50%;
+            color: var(--text-secondary);
+            border: 1px solid rgba(255,255,255,0.12);
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .nav-ig:hover { color: var(--primary); border-color: var(--primary); }
+        .nav-right { display: flex; align-items: center; }
+        .footer-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; row-gap: 8px; }
+        .footer-links a.footer-ig { display: inline-flex; align-items: center; gap: 6px; }
+        .footer-ig .ig-icon { width: 16px; height: 16px; }
+
         /* === FOOTER === */
         footer {
             border-top: 1px solid rgba(255,255,255,0.06);
@@ -585,11 +611,14 @@
             <img src="logo.png" alt="Fish Navigator">
             Fish Navigator
         </div>
+        <div class="nav-right">
         <div class="nav-links">
             <a href="#features">Возможности</a>
             <a href="#download">Скачать</a>
             <a href="#licenses">Продавать путёвки</a>
             <a href="privacy.html">Конфиденциальность</a>
+        </div>
+        <a class="nav-ig" href="https://www.instagram.com/fishnavigator.kz/" target="_blank" rel="noopener" aria-label="Fish Navigator в Instagram" title="Instagram @fishnavigator.kz"><span class="ig-icon"></span></a>
         </div>
     </div>
 </nav>
@@ -618,15 +647,15 @@
 <section class="stats">
     <div class="stats-inner">
         <div class="stat">
-            <div class="stat-number">897</div>
+            <div class="stat-number" data-stat="lakes">898</div>
             <div class="stat-label">озёр</div>
         </div>
         <div class="stat">
-            <div class="stat-number">36</div>
+            <div class="stat-number" data-stat="rivers">36</div>
             <div class="stat-label">участков рек</div>
         </div>
         <div class="stat">
-            <div class="stat-number">75</div>
+            <div class="stat-number" data-stat="bases">75</div>
             <div class="stat-label">рыболовных баз</div>
         </div>
         <div class="stat">
@@ -724,11 +753,25 @@
     <div class="footer-links">
         <a href="privacy.html">Политика конфиденциальности</a>
         <a href="mailto:fishnavigator.kz@gmail.com">Связаться</a>
+        <a class="footer-ig" href="https://www.instagram.com/fishnavigator.kz/" target="_blank" rel="noopener"><span class="ig-icon"></span>Instagram</a>
     </div>
     <p class="footer-copy">&copy; 2026 Fish Navigator. Все водоёмы Казахстана в одном приложении.</p>
 </footer>
 
 <script>
+    // Цифры базы водоёмов: stats.json обновляется автоматически после сборки приложения.
+    // Если файл недоступен, остаются значения, прописанные в HTML.
+    fetch('stats.json', { cache: 'no-cache' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (st) {
+            if (!st) return;
+            document.querySelectorAll('[data-stat]').forEach(function (el) {
+                var v = st[el.getAttribute('data-stat')];
+                if (typeof v === 'number' && v > 0) el.textContent = v;
+            });
+        })
+        .catch(function () {});
+
     document.getElementById('licenseForm').addEventListener('submit', function(e) {
         e.preventDefault();
         const name = document.getElementById('licenseName').value.trim();
