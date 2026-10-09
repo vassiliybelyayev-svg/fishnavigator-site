@@ -531,10 +531,19 @@
             transition: color 0.2s, border-color 0.2s;
         }
         .nav-ig:hover { color: var(--primary); border-color: var(--primary); }
+        .nav-ig + .nav-ig { margin-left: 10px; }
+        .tg-icon {
+            display: inline-block;
+            width: 20px; height: 20px;
+            background-color: currentColor;
+            -webkit-mask: url('https://cdn.jsdelivr.net/npm/simple-icons@13.0.0/icons/telegram.svg') center / contain no-repeat;
+            mask: url('https://cdn.jsdelivr.net/npm/simple-icons@13.0.0/icons/telegram.svg') center / contain no-repeat;
+            vertical-align: middle;
+        }
         .nav-right { display: flex; align-items: center; }
         .footer-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; row-gap: 8px; }
         .footer-links a.footer-ig { display: inline-flex; align-items: center; gap: 6px; }
-        .footer-ig .ig-icon { width: 16px; height: 16px; }
+        .footer-ig .ig-icon, .footer-ig .tg-icon { width: 16px; height: 16px; }
 
         /* === FOOTER === */
         footer {
@@ -619,6 +628,7 @@
             <a href="privacy.html">Конфиденциальность</a>
         </div>
         <a class="nav-ig" href="https://www.instagram.com/fishnavigator.kz/" target="_blank" rel="noopener" aria-label="Fish Navigator в Instagram" title="Instagram @fishnavigator.kz"><span class="ig-icon"></span></a>
+        <a class="nav-ig" href="https://t.me/fishnavigator" target="_blank" rel="noopener" aria-label="Fish Navigator в Telegram" title="Telegram @fishnavigator"><span class="tg-icon"></span></a>
         </div>
     </div>
 </nav>
@@ -628,7 +638,7 @@
     <div class="hero-content">
         <div class="hero-text">
             <div class="hero-tag">🇰🇿 Сделано в Казахстане</div>
-            <h1>Все водоёмы Казахстана <span class="accent">в кармане</span></h1>
+            <h1>Карта водоёмов Казахстана <span class="accent">в кармане</span></h1>
             <p>Более 1000 озёр, рек и рыболовных баз во всех 16 областях — с координатами, видами рыбы и запретами на лов. База водоёмов работает без интернета.</p>
             <div class="hero-badges">
                 <span class="badge"><span class="b-icon">📍</span> 1000+ водоёмов</span>
@@ -754,8 +764,9 @@
         <a href="privacy.html">Политика конфиденциальности</a>
         <a href="mailto:fishnavigator.kz@gmail.com">Связаться</a>
         <a class="footer-ig" href="https://www.instagram.com/fishnavigator.kz/" target="_blank" rel="noopener"><span class="ig-icon"></span>Instagram</a>
+        <a class="footer-ig" href="https://t.me/fishnavigator" target="_blank" rel="noopener"><span class="tg-icon"></span>Telegram</a>
     </div>
-    <p class="footer-copy">&copy; 2026 Fish Navigator. Все водоёмы Казахстана в одном приложении.</p>
+    <p class="footer-copy">&copy; 2026 Fish Navigator. Карта водоёмов Казахстана в одном приложении.</p>
 </footer>
 
 <script>
